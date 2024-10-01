@@ -5,12 +5,15 @@ require('dotenv').config();
 
 const app = express();
 
-const corsOptions = {
-    origin: `${process.env.FRONTEND_API_URL}`,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: `${process.env.FRONTEND_API_URL}`,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// };
+// app.use(cors(corsOptions));
+
+// allow all origins testing
+app.use(cors())
 
 app.use(express.json());
 app.use('/api/items', itemRoutes);
