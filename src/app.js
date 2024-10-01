@@ -5,12 +5,8 @@ require('dotenv').config();
 
 const app = express();
 
-// Configuración básica de CORS
-// app.use(cors());
-
-//  Configuración avanzada de CORS (opcional)
 const corsOptions = {
-    origin: `${process.env.FRONTEND_API_URL}`, // Cambia esto a la URL de tu frontend
+    origin: `${process.env.FRONTEND_API_URL}`,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 };
