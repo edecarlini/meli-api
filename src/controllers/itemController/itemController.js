@@ -27,12 +27,17 @@ const getItems = async (req, res) => {
     const limit = parseInt(req.query.limit) || 4;
     const offset = (page - 1) * limit;
 
+    console.log("Query received:", query);  // <-- Agrega este log
+    console.log("Offset:", offset);         // <-- Agrega este log
+
     if (!query) {
         return res.status(400).json({ error: 'Query parameter is required' });
     }
 
     try {
         const response = await axios.get(`${process.env.MERCADOLIBRE_API_URL}/sites/MLA/search?q=${query}`);
+        console.log("MercadoLibre API response:", response.data);  // <-- Agrega este log
+
         const items = await Promise.all(response.data.results.slice(offset, offset + limit).map(async (item) => {
             const sellerInfo = await getUserInfo(item.seller.id);
             return {
@@ -80,9 +85,11 @@ const getItems = async (req, res) => {
             }
         });
     } catch (error) {
+        console.error("Error fetching items:", error);  // <-- Agrega este log
         res.status(500).json({ error: 'Error fetching items from Mercado Libre' });
     }
 };
+
 
 const getItemById = async (req, res) => {
     const id = req.params.id;
