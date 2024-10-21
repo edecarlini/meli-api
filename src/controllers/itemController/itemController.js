@@ -85,7 +85,7 @@ const getItems = async (req, res) => {
             }
         });
     } catch (error) {
-        console.error("Error fetching items:", error);  // <-- Agrega este log
+        console.error("Error fetching items:", error);
         res.status(500).json({ error: 'Error fetching items from Mercado Libre' });
     }
 };
